@@ -1,11 +1,7 @@
 function TaskStats({ tasks = [] }) {
-  const completedToday = tasks.filter(task => {
-    const today = new Date().toDateString()
-    return task.completed && new Date(task.completedAt).toDateString() === today
-  }).length
-
   const totalTasks = tasks.length
   const completedTasks = tasks.filter(t => t.completed).length
+  const pendingTasks = totalTasks - completedTasks
 
   return (
     <div className="task-stats">
@@ -19,8 +15,8 @@ function TaskStats({ tasks = [] }) {
         <strong>{completedTasks}</strong>
       </div>
       <div className="stat">
-        <span>Completed Today:</span>
-        <strong>{completedToday}</strong>
+        <span>Pending:</span>
+        <strong>{pendingTasks}</strong>
       </div>
     </div>
   )
